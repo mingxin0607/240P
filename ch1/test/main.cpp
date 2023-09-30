@@ -141,12 +141,13 @@ void test6(){
     boc.deleteUser(id2);
     boc.printInfo();
 
-    bola.addUser(account1);
+    int id4 = bola.addUser(account1);
     bola.addUser(account2);
     bola.addUser(account3);
     int id3 = bola.addUser(account4);
     bola.addUser(account5);
     bola.deleteUser(id3);
+    bola.deleteUser(id4);
     bola.printInfo();
 
     boc.mergeBanks(bola);

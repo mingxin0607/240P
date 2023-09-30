@@ -144,6 +144,8 @@ void BOC::mergeBanks(BOC bola){
             p1 = p1->next;
         }
         else{
+            AccountInfo new_account = p2->next->account_info_;
+            this->addUser(new_account);
             p2 = p2->next;
         }
         
