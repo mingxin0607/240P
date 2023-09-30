@@ -98,6 +98,12 @@ int BOC::getMedianID(){
 }
 
 bool BOC::mergeAccounts(int id1, int id2){
+    // make id1 the smaller one
+    if (id1 > id2) {
+        int temp = id1;
+        id1 = id2;
+        id2 = temp;
+    }
     AccountListNode* p = dummy_head;
     AccountListNode* p1 = nullptr; // pointer of first account
     AccountListNode* p2 = nullptr; // pointer of second account
@@ -121,6 +127,7 @@ bool BOC::mergeAccounts(int id1, int id2){
         std::cerr << "account info not match" << std::endl;
         return false;
     }
+
     p1->account_info_.deposit += p2->account_info_.deposit;
     deleteUser(id2);
     return true;

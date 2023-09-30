@@ -115,7 +115,7 @@ void test5(){
     boc.mergeAccounts(id1, id3);
     boc.printInfo();
 
-    boc.mergeAccounts(id2, id4);
+    boc.mergeAccounts(id4, id2);
     boc.printInfo();
 
     boc.mergeAccounts(id2, id5);
