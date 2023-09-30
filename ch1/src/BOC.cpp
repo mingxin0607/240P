@@ -72,17 +72,26 @@ bool BOC::payUserToUser(int payer_id, int payee_id, double amount){
 }
 
 int BOC::getMedianID(){
+
+    // use fast-slow pointers, the fast pointer moves 2 steps 
+    // and the slow pointer moves 1 step each time
+    // when fast pointer reaches the end,
+    // the slow pointer is at median position or first of the two median position
+
     AccountListNode* p1 = dummy_head->next;
     AccountListNode* p2 = p1;
     while(p2){
+        // move fast pointer 2 steps
         p2 = p2->next;
         if (!p2) {
             break;
         }
         p2 = p2->next;
         if (!p2) {
+            // if fast pointer reaches the end, would not move slow pointer
             break;
         }
+        // move slow pointer 2 steps
         p1 = p1->next;
     }
     return p1->account_id_;
@@ -133,8 +142,11 @@ void BOC::printInfo(){
 void BOC::mergeBanks(BOC bola){
     AccountListNode* p1 = dummy_head;
     AccountListNode* p2 = bola.dummy_head;
+    // merge the bola list to list in this object
+    // if p1 or p2 reaches the end, stop at once
     while(p1->next && p2->next){
         if (p1->next->account_id_ == p2->next->account_id_){
+            // account id is the same, add a new node with same info as p2 node
             AccountInfo new_account = p2->next->account_info_;
             this->addUser(new_account);
             p1 = p1->next;
@@ -144,12 +156,15 @@ void BOC::mergeBanks(BOC bola){
             p1 = p1->next;
         }
         else{
+            // p2 node id is smaller, insert p2 node to p1 list
             AccountInfo new_account = p2->next->account_info_;
             this->addUser(new_account);
             p2 = p2->next;
         }
         
     }
+    // if p1 reaches the end first, link the rest of bola list
+    // if bola list(p2) ended first, no further action is needed
     if (p2->next){
         p1->next = p2->next;
     }
