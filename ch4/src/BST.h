@@ -20,7 +20,7 @@ class BST{
     private:
     Node *root;
     Node* backtrack_insert(Node *root, Node *new_node);
-    void backtrack_traverse(Node *root);
+    void backtrack_traverse(Node *root, std::ofstream&);
     public:
     BST():root(nullptr){};
     void insert(StuInfo stu_info);

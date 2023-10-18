@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <queue>
+#include <fstream>
 #include "BST.h"
 
 std::string to_lower_case(const std::string& str) {
@@ -26,23 +27,38 @@ void BST::insert(StuInfo stu_info){
     root = backtrack_insert(root, new_node);
 }
 
-void BST::backtrack_traverse(Node *root){
+void BST::backtrack_traverse(Node *root, std::ofstream& output_file){
     if (root == nullptr){
         return;
     }
-    backtrack_traverse(root->left);
-    std::cout << root->stu_info.last_name << " " << root->stu_info.number \
+    backtrack_traverse(root->left, output_file);
+    output_file << root->stu_info.last_name << " " << root->stu_info.number \
     << " " << root->stu_info.home_department << " " << root->stu_info.program \
     << " " << root->stu_info.program << " " << root->stu_info.year << std::endl;
-    backtrack_traverse(root->right);
+    backtrack_traverse(root->right, output_file);
 }
 
 void BST::in_order_traverse(){
-    backtrack_traverse(root);
+    std::string output_filename = "in_order_traverse.txt";
+    std::ofstream output_file(output_filename);
+
+    if (!output_file.is_open()) {
+        std::cerr << "Failed to open output file: " << output_filename << std::endl;
+        return;
+    }
+    backtrack_traverse(root, output_file);
+    output_file.close();
 }
 
 void BST::level_traverse(){
     if (root == nullptr) {
+        return;
+    }
+    std::string output_filename = "level_traverse.txt";
+    std::ofstream output_file(output_filename);
+
+    if (!output_file.is_open()) {
+        std::cerr << "Failed to open output file: " << output_filename << std::endl;
         return;
     }
     std::queue<Node*> que;
@@ -52,7 +68,7 @@ void BST::level_traverse(){
         while (size--){
             Node * tmp = que.front();
             que.pop();
-            std::cout << tmp->stu_info.last_name << " " << tmp->stu_info.number \
+            output_file << tmp->stu_info.last_name << " " << tmp->stu_info.number \
             << " " << tmp->stu_info.home_department << " " << tmp->stu_info.program \
             << " " << tmp->stu_info.program << " " << tmp->stu_info.year << std::endl;
             if (tmp->left != nullptr) {
@@ -63,4 +79,5 @@ void BST::level_traverse(){
             }
         }
     }
+    output_file.close();
 }

@@ -24,10 +24,10 @@ int main() {
     file.close();
 
     std::cout << "in order traverse" << std::endl;
-    bst.in_order_traverse();
+    // bst.in_order_traverse();
 
     std::cout << "level traverse" << std::endl;
-    bst.level_traverse();
+    // bst.level_traverse();
 
     return 0;
 }
