@@ -34,7 +34,7 @@ void BST::backtrack_traverse(Node *root, std::ofstream& output_file){
     backtrack_traverse(root->left, output_file);
     output_file << root->stu_info.last_name << " " << root->stu_info.number \
     << " " << root->stu_info.home_department << " " << root->stu_info.program \
-    << " " << root->stu_info.program << " " << root->stu_info.year << std::endl;
+    << " " << root->stu_info.year << std::endl;
     backtrack_traverse(root->right, output_file);
 }
 
@@ -70,7 +70,7 @@ void BST::level_traverse(){
             que.pop();
             output_file << tmp->stu_info.last_name << " " << tmp->stu_info.number \
             << " " << tmp->stu_info.home_department << " " << tmp->stu_info.program \
-            << " " << tmp->stu_info.program << " " << tmp->stu_info.year << std::endl;
+            << " " << tmp->stu_info.year << std::endl;
             if (tmp->left != nullptr) {
                 que.push(tmp->left);
             }
